@@ -1,17 +1,26 @@
-// Dependencies and Variables
-let express = require("express");
-let exphbs = require("express-handlebars");
+//Dependencies and Variables
+var express = require("express");
+var exphbs = require ("express-handlebars");
+var app = express();
+var port = process.env.PORT || 8080;
 
-let app = express();
-
-//To use the static content from the "public" directory
-app.use(express.static("public"));
-
-//To use express for data parsing
+//For Express to parse JSON 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//To connect server to handlebars and set the view to the default layout 
+// Set Handlebars as the view engine and static content from the public folder
+app.use(express.static("public"));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
+// // Override with POST having ?_method=DELETE
+// app.use(methodOverride('_method'));
+
+//Routes for server access
+var routes = require('./controllers/burgers_controllers.js');
+app.use(routes); //('/')
+
+//Set up for server to listen to client requests
+app.listen(port, function() {
+  console.log("listening on port: ", port);
+});

@@ -1,8 +1,9 @@
+INSERT INTO burgers
+(burger_name, devoured)
 
-INSERT INTO burgers (burger_name,devoured)
 VALUES
-("Bursted Tummy", "TRUE"),
-("Pineapple Bacon Deluxe", "TRUE"),
-("Cheeseburger", "FALSE"),
-("Burger - No Bun", "FALSE");
-
+("Impossible Burger", false),
+("Double Stacked Bacon Burger", false),
+("Veggie Burger", false),
+("Kids Cheeseburger", false),
+("Plain Hamburger",true);

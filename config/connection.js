@@ -1,22 +1,24 @@
 // Dependencies and Variables
-let mysql = require("mysql");
+var mysql = require("mysql");
 
-//To establish connection to database
-let connection = mysql.createConnection({
+// Set up MySQL connection for local access
+
+  var connection = mysql.createConnection({
+    port: 3306,
     host: "localhost",
-    port: 8080,
     user: "root",
     password: "paula",
     database: "burgers_db"
   });
-  
-  connection.connect(function(err) {
-    if (err) {
-      console.error("error connecting: " + err.stack);
-      return;
-    }
-    console.log("connected as id " + connection.threadId + "on port# " + port);
-  });
-  
-//To export the connection function
+
+// Make connection.
+connection.connect(function(err) {
+  if (err) {
+    console.error("error connecting: " + err.stack);
+    return;
+  }
+  console.log("connected as id " + connection.threadId);
+});
+
+// Export connection for our ORM to use.
 module.exports = connection;
