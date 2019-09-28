@@ -2,7 +2,6 @@
 var mysql = require("mysql");
 
 // Set up MySQL connection for local access if server cannot access Jawsdb
-
 if(process.env.JAWSDB_URL){
   connection = mysql.createConnection(process.env.JAWSDB_URL);
 }else{
@@ -16,7 +15,7 @@ if(process.env.JAWSDB_URL){
   });
 }
 
-// Make connection.
+// Make connection
 connection.connect(function(err) {
   if (err) {
     console.error("error connecting: " + err.stack);

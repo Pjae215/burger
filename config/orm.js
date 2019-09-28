@@ -1,7 +1,7 @@
 //Dependencies and Variables
 var connection = require("../config/connection.js");
 
-
+//Function to loop through question marks (or unknown entries)a return as a string
 function printQuestionMarks(num) {
   var arr = [];
 
@@ -12,26 +12,23 @@ function printQuestionMarks(num) {
   return arr.toString();
 }
 
-// Helper function to convert object key/value pairs to SQL syntax
+//Function converts object key/value pairs to SQL syntax then pushes string to the array
 function objToSql(ob) {
   var arr = [];
 
-  // loop through the keys and push the key/value as a string int arr
   for (var key in ob) {
     var value = ob[key];
-    // check to skip hidden properties
+  
     if (Object.hasOwnProperty.call(ob, key)) {
-      // if string with spaces, add quotations (Lana Del Grey => 'Lana Del Grey')
+    
       if (typeof value === "string" && value.indexOf(" ") >= 0) {
         value = "'" + value + "'";
       }
-      // e.g. {name: 'Lana Del Grey'} => ["name='Lana Del Grey'"]
-      // e.g. {sleepy: true} => ["sleepy=true"]
       arr.push(key + "=" + value);
     }
   }
 
-  // translate array of strings to a single comma-separated string
+//Translates array of strings to a single comma-separated string
   return arr.toString();
 }
 
@@ -46,8 +43,9 @@ var orm = {
       cb(result);
     });
   },
+// Create function to insert string into a single row in the target table
   create: function(table, cols, vals, cb) {
-		// Construct the query string that inserts a single row into the target table
+
 		var queryString = "INSERT INTO " + table;
 
 		queryString += " (";
@@ -60,17 +58,16 @@ var orm = {
     console.log(vals.length);
 		console.log(queryString);
 
-		// Perform the database query
+//Executes db query and returns callback
 		connection.query(queryString, vals, function(err, result) {
 			if (err) {
 				throw err;
 			}
-	// Return results in callback
 			cb(result);
 		});
 	},
 
-  // An example of objColVals would be
+//Update table function
   update: function(table, objColVals, condition, cb) {
     var queryString = "UPDATE " + table;
 
@@ -91,5 +88,5 @@ var orm = {
   },
 
 };
-// Export the orm object for the model (cat.js).
+// Export the orm object for the model file (burger.js).
 module.exports = orm;

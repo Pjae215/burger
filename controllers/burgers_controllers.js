@@ -9,7 +9,7 @@ router.get("/", function(req, res) {
     var hbsObject = {
       burgers: data
     };
-  
+
     console.log(hbsObject);
 //Handlebars dispay
     res.render("index", hbsObject);
@@ -23,8 +23,8 @@ router.post("/burgers", function(req, res) {
    ], [
      req.body.burger_name
    ], function(result) {
-  
-     res.json({id: result.insertId });
+     
+res.json({id: result.insertId });
     
    });
  });
