@@ -1,10 +1,10 @@
 body {
     min-height: 90%;
     margin: 20px;
-    background-color: paleturquoise;
+    background-color: lightyellow;
 }
 .jumbotron {
-    background-image: url("https://cdn.dribbble.com/users/23537/screenshots/1882213/walking-cheeseburger.gif");
+    background-image: url("https://cdn-image.myrecipes.com/sites/default/files/styles/4_3_horizontal_-_1200x900/public/classic-burgers-u.jpg?itok=-tU5CM7w");
     height: 250px;
     width: 100%;
 }
@@ -12,14 +12,13 @@ img {
     width: auto;
 }
 h1 {
-    font-family: 'Black Ops One', cursive;
+    font-family: Tahoma, sans-serif;
     text-align: center;
     margin-top: -70px;
     font-size: 70px;
 }
 h2 {
-    font-family: 'Love Ya Like A Sister', cursive;
-    color: green;
+    font-family: Tahoma, sans-serif;
     font-size: 30px;
 }
 .list-group-item {
@@ -27,7 +26,7 @@ h2 {
 }
 li.list-group-item {
     background: none;
-    font-family: 'Finger Paint', cursive;
+    font-family: Tahoma, sans-serif;
     color: rebeccapurple;
 }
 button {
@@ -62,8 +61,3 @@ footer {
 span.grey-text{
     margin-left:400px;
 }
-
-/* .burgerFooter {
-	background-color:#c5e2ef;
-	padding: 20px 0;
-} */

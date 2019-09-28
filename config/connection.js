@@ -1,7 +1,11 @@
 // Dependencies and Variables
 var mysql = require("mysql");
 
-// Set up MySQL connection for local access
+// Set up MySQL connection for local access if server cannot access Jawsdb
+
+if(process.env.JAWSDB_URL){
+  connection = mysql.createConnection(process.env.JAWSDB_URL);
+}else{
 
   var connection = mysql.createConnection({
     port: 3306,
@@ -10,6 +14,7 @@ var mysql = require("mysql");
     password: "paula",
     database: "burgers_db"
   });
+}
 
 // Make connection.
 connection.connect(function(err) {
