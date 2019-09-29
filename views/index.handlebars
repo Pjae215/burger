@@ -1,55 +1,57 @@
-<title>Eat-Da-Burger</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="../public/assets/css/burger_style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	
+{{!-- Creating template that renders to main layout via Handlebars --}}
 
 
-<div class="jumbotron">
-  <h1>Eat-Da-Burger!</h1>
-
-</div> 
-<div class="row" id="burgers"class="col-3 col-md-3 col-sm-12">
-  <div class="col-3 col-md-3 col-sm-12"id="addburger">
-      <h2>Create Your Own Burger</h2>
-      <br>
-
-    <form action="/burgers" method="POST">
-      <input type="text" id="name" name="burger_name" placeholder="Burger Name">
-      <button type="submit" class="addBurgerButton">Create My Burger</button>
+<!-- Jumbotron -->
+<div class="jumbotron jumbotron-fluid" style = "background-color: black; text-align:center">
+  <div class="container" id= "jumbo">
+    <h1>Eat The Burger</h1>
+    <br>
+    </div>
+<!--Create New Burger -->
+    <form class="create-form">
+                <div class="form-group">
+                    <label for="newburger">Create A Burger:</label>
+                    <input type="text" id="newburger" name="burger">
+                    <button class= "btn btn-danger btn-sm" type="submit" id="addburger">Add my Burger </button>
+                </div>
     </form>
-  </div>
 
- <div id="burgernoteaten"class="col-4 col-md-4  col-sm-6">
-   <h2>Burgers Available</h2>
-    <div class="col-12 col-md-12 col-sm-6">
-       <ul class="noteaten">
-      {{#each burgers}}
-       {{#unless this.devoured}}
-      <li class="list-group-item">
-        <form action="/burgers/{{this.id}}?_method=PUT" method="POST">
-          <button type="submit" class='burgerAvailable'> {{this.burger_name}}</button>
-        </form>
-      </li>
-      {{/unless}} {{/each}}
-      </ul>
-    </div>
-  </div>`
-
-  <div id="burgereaten" class="col-4 col-md-4  col-sm-6">
-     <h2>Burgers Devoured</h2>
-   <div class="col-12 col-md-12 col-sm-6">
-      <ul class="eaten">
-      {{#each burgers}} {{#if this.devoured}}
-     <li class="list-group-item">
-      {{this.burger_name}} {{/if}} {{/each}}
-      </li>
-      </ul>
-    </div>
-  </div>
-  
 </div>
+
+<!--Burger Menu -->
+<div class="container" id= "allburgers">
+    <div class="row">
+
+<!--Burgers Not Eaten -->
+    <div class="col-sm-6 panel-heading"><h4 style = "text-align:center"><strong>Burgers Not Eaten</strong></h4>
+                <div class="panel-body">
+                <ul>
+                    {{#each burgers}}
+                        {{#unless devoured}}
+                           <i class="fa fa-square"><span><strong> {{this.burger_name}} </strong> </span></i>
+                            <button type="button" class="btn btn-success btn-sm pull-right" style= "font-size:16px" id ="eatbutton" 
+                            data-id="{{this.id}}" data-newDevoured="{{devour}}"> Devour Burger</button>
+                            <hr>
+                        {{/unless}}
+                    {{/each}}
+                </ul>
+                </div>
+        </div>
+
+<!--Burgers Devoured -->
+    <div class="col-sm-6 panel-heading"><h4 style = "text-align:center"><strong>Burgers Devoured</strong></h4>
+                <div class="panel-body">
+                    <ul>
+                        {{#each burgers}}
+                            {{#if devoured}}
+                                <span><strong> {{this.id}} : {{this.burger_name}} </strong></span>
+                                <button class="btn btn-danger btn-sm pull-right" style= "font-size:16px" id ="remove" 
+                                data-id="{{this.id}}" data-newDevoured="{{devour}}"> Remove Guilt </button>
+                                <hr>
+                            {{/if}}
+                        {{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>

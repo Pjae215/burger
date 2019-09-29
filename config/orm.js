@@ -34,43 +34,39 @@ function objToSql(ob) {
 
 // Object for all our SQL statement functions.
 var orm = {
-  all: function(tableInput, cb) {
-    var queryString = "SELECT * FROM " + tableInput + ";";
+  // Display all burgers in the db.
+  selectAll: function(table, cb) {
+    var queryString = "SELECT * FROM " + table + ";";
+
     connection.query(queryString, function(err, result) {
-      if (err) {
-        throw err;
-      }
-      cb(result);
+        if (err) {
+            throw err;
+        }
+        cb(result);
     });
-  },
-// Create function to insert string into a single row in the target table
-  create: function(table, cols, vals, cb) {
-
-		var queryString = "INSERT INTO " + table;
-
-		queryString += " (";
-		queryString += cols.toString();
-		queryString += ") ";
-		queryString += "VALUES (";
-		queryString += printQuestionMarks(vals.length);
+},
+// Add a burger to the db.
+insertOne: function(table, cols, vals, cb) {
+    var queryString = "INSERT INTO " + table;
+    queryString += " (";
+    queryString += cols.toString();
     queryString += ") ";
-    
-    console.log(vals.length);
-		console.log(queryString);
+    queryString += "VALUES (";
+    queryString += printQuestionMarks(vals.length);
+    queryString += ") ";
 
-//Executes db query and returns callback
-		connection.query(queryString, vals, function(err, result) {
-			if (err) {
-				throw err;
-			}
-			cb(result);
-		});
-	},
+    console.log(queryString);
 
-//Update table function
-  update: function(table, objColVals, condition, cb) {
+    connection.query(queryString, vals, function(err, result) {
+        if (err) {
+            throw err
+        }
+        cb(result);
+    });
+},
+// Set burger devoured status to true.
+updateOne: function(table, objColVals, condition, cb) {
     var queryString = "UPDATE " + table;
-
     queryString += " SET ";
     queryString += objToSql(objColVals);
     queryString += " WHERE ";
@@ -79,14 +75,30 @@ var orm = {
     console.log(queryString);
 
     connection.query(queryString, function(err, result) {
-      if (err) {
-        throw err;
-      }
-
-      cb(result);
+        if (err) {
+            throw err
+        }
+        cb(result);
     });
-  },
+},
+// Delete a burger from the db.
+deleteOne: function(table, condition, cb) {
+    var queryString = "DELETE FROM " + table;
+    queryString += " WHERE ";
+    queryString += condition;
+
+    console.log(queryString);
+
+    connection.query(queryString, function(err, result) {
+        if (err) {
+            throw err
+        }
+        cb(result);
+    });
+}
 
 };
+
+
 // Export the orm object for the model file (burger.js).
 module.exports = orm;
