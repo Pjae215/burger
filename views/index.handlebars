@@ -29,7 +29,7 @@
                     {{#each burgers}}
                         {{#unless devoured}}
                            <i class="fa fa-square"><span><strong> {{this.burger_name}} </strong> </span></i>
-                            <button type="button" class="btn btn-success btn-sm pull-right" style= "font-size:16px" id ="eatbutton" 
+                            <button type="button" class="btn btn-success btn-sm pull-right eatbutton" onkeyup= "changeToUpperCase()" style= "font-size:16px"
                             data-id="{{this.id}}" data-newDevoured="{{devour}}"> Devour Burger</button>
                             <hr>
                         {{/unless}}
@@ -44,8 +44,8 @@
                     <ul>
                         {{#each burgers}}
                             {{#if devoured}}
-                                <span><strong> {{this.id}} : {{this.burger_name}} </strong></span>
-                                <button class="btn btn-danger btn-sm pull-right" style= "font-size:16px" id ="remove" 
+                                <i class="fa fa-square"><span><strong> {{this.burger_name}} </strong> </span></i>
+                                <button class="btn btn-danger btn-sm pull-right remove" style= "font-size:16px"
                                 data-id="{{this.id}}" data-newDevoured="{{devour}}"> Remove Guilt </button>
                                 <hr>
                             {{/if}}

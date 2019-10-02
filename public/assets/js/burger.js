@@ -1,13 +1,14 @@
 // Functions for handlebars
 
-$(function() {
+$(document).ready(function() {
 
 // Add a new burger.
-    $("#addburger").on("submit", function(event) {
+    $("#addburger").on("click", function(event) {
         event.preventDefault();
-
+        
+        //Input will be trimmed and changed to uppercase
         var newBurger = {
-            burger_name: $("#newburger").val().trim(),
+            burger_name: $("#newburger").val().trim().toUpperCase(),
             devoured: 0
         };
 
@@ -22,7 +23,7 @@ $(function() {
         });
     });
 //Devour a burger
-$("#eatbutton").on("click", function(event) {
+$(".eatbutton").on("click", function(event) {
     event.preventDefault();
 
     var id = $(this).data("id");
@@ -40,7 +41,7 @@ $("#eatbutton").on("click", function(event) {
     });
 });
 //Remove devoured burger
-    $("#remove").on("click", function(event) {
+    $(".remove").on("click", function(event) {
         event.preventDefault();
 
         var id = $(this).data("id");
